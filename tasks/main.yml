@@ -1,0 +1,24 @@
+---
+
+- name: Install munin-node
+  apt: name={{ item }} state=present
+  with_items:
+   - munin-node
+   - munin-plugins-extra
+  tags: munin-node
+
+- name: Configure munin-node file
+  template: src=munin-node.conf.j2 dest=/etc/munin/munin-node.conf
+  notify: restart munin-node
+  tags: munin-node
+
+- name: Configure munin-node
+  template: src=munin-node.conf.j2 dest=/etc/munin/munin-node.conf
+  notify: restart munin-node
+  tags: munin-node
+
+- name: Configure munin plugins file
+  template: src=plugin-conf.d/munin-node.j2 dest=/etc/munin/plugin-conf.d/munin-node
+  notify: restart munin-node
+  tags: munin-node
+
