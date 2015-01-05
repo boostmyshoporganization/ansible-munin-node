@@ -21,4 +21,9 @@ munin_node:
   allow:
     - allow ^127\.0\.0\.1$
     - allow ^::1$
+  plugins:
+    - mysql_
+    - mysql_threads
+    - mysql_queries
+    - mysql_slowqueries
 ```

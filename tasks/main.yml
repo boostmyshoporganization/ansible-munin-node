@@ -22,3 +22,8 @@
   notify: restart munin-node
   tags: munin-node
 
+- name: Enable the plugins
+  file: src=/usr/share/munin/plugins/{{ item }} dest=/etc/munin/plugins/{{ item }} state=link
+  with_items: munin_node.plugins
+  notify: restart munin-node
+  tags: munin-node
