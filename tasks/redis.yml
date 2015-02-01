@@ -1,0 +1,13 @@
+---
+
+- name: Install the redis plugins
+  git: repo=https://github.com/gilles/redis-munin dest=/usr/share/munin/plugins/redis-munin
+  tags:
+    - munin-node
+    - redis
+
+- name: Install the redis plugins
+  shell: mv /usr/share/munin/plugins/redis-munin/redis_* /usr/share/munin/plugins/
+  tags:
+    - munin-node
+    - redis

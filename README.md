@@ -19,8 +19,8 @@ Configuration
 ```yaml
 munin_node:
   allow:
-    - allow ^127\.0\.0\.1$
-    - allow ^::1$
+    - ^127\.0\.0\.1$
+    - ^::1$
   plugins:
     - mysql_
     - mysql_threads

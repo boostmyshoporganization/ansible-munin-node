@@ -1,0 +1,15 @@
+---
+
+- name: Install the elasticsearch plugins
+  git: repo=https://github.com/y-ken/munin-plugin-elasticsearch dest=/usr/share/munin/plugins/elasticsearch-munin
+  when: elasticsearch.stat.isdir is not defined or not elasticsearch.stat.isdir
+  tags:
+    - munin-node
+    - elasticsearch
+
+- name: Install the elasticsearch plugins
+  shell: mv /usr/share/munin/plugins/elasticsearch-munin/elasticsearch_* /usr/share/munin/plugins/
+  when: elasticsearch.stat.isdir is not defined or not elasticsearch.stat.isdir
+  tags:
+    - munin-node
+    - elasticsearch
