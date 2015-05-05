@@ -1,0 +1,10 @@
+---
+
+munin_node:
+  allow:
+    - ^127\.0\.0\.1$
+    - ^::1$
+  plugins:
+  variables:
+    - df.warning: 92
+    - df.critical: 98
