@@ -1,15 +1,16 @@
 ---
 
-- name: Install the elasticsearch plugins
+- stat: path=/usr/share/munin/plugins/elasticsearch-munin
+  register: elasticsearch
+
+- name: Clone the elasticsearch plugins
   git: repo=https://github.com/y-ken/munin-plugin-elasticsearch dest=/usr/share/munin/plugins/elasticsearch-munin
-  when: elasticsearch.stat.isdir is not defined or not elasticsearch.stat.isdir
   tags:
     - munin-node
     - elasticsearch
 
-- name: Install the elasticsearch plugins
-  shell: mv /usr/share/munin/plugins/elasticsearch-munin/elasticsearch_* /usr/share/munin/plugins/
-  when: elasticsearch.stat.isdir is not defined or not elasticsearch.stat.isdir
+- name: Copy the elasticsearch plugins
+  copy: src=/usr/share/munin/plugins/elasticsearch-munin/elasticsearch_* dest=/usr/share/munin/plugins/ remote_src=True
   tags:
     - munin-node
     - elasticsearch

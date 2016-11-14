@@ -1,13 +1,16 @@
 ---
 
-- name: Install the redis plugins
+- stat: path=/usr/share/munin/plugins/redis-munin
+  register: redis
+
+- name: Clone the redis plugins
   git: repo=https://github.com/gilles/redis-munin dest=/usr/share/munin/plugins/redis-munin
   tags:
     - munin-node
     - redis
 
-- name: Install the redis plugins
-  shell: mv /usr/share/munin/plugins/redis-munin/redis_* /usr/share/munin/plugins/
+- name: Copy the redis plugins to the munin directory
+  copy: src=/usr/share/munin/plugins/redis-munin/* dest=/usr/share/munin/plugins/ remote_src=True
   tags:
     - munin-node
     - redis

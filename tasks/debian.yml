@@ -22,17 +22,13 @@
   notify: restart munin-node
   tags: munin-node
 
-- stat: path=/usr/share/munin/plugins/redis-munin
-  register: redis
+- name: Include the redis tasks
+  include: redis.yml
+  when: "munin_node.external_plugins is defined and 'redis' in munin_node.external_plugins"
 
-- include: redis.yml
-  when: redis.stat.isdir is not defined or not redis.stat.isdir
-
-- stat: path=/usr/share/munin/plugins/elasticsearch-munin
-  register: elasticsearch
-
-- include: elasticsearch.yml
-  when: elasticsearch.stat.isdir is not defined or not elasticsearch.stat.isdir
+- name: Include the elasticsearch tasks
+  include: elasticsearch.yml
+  when: "munin_node.external_plugins is defined and 'elasticsearch' in munin_node.external_plugins"
 
 - name: Enable the plugins
   file: src=/usr/share/munin/plugins/{{ item }} dest=/etc/munin/plugins/{{ item }} state=link

@@ -26,6 +26,9 @@ munin_node:
     - mysql_threads
     - mysql_queries
     - mysql_slowqueries
+  external_plugins:
+    - redis
+    - elasticsearch
   variables:
     - df.warning: 92
     - df.critical: 98
